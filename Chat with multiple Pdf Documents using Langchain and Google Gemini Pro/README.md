@@ -48,13 +48,7 @@ streamlit run app.py
 - PDF summarization before full query
 - Use cloud storage for larger PDFs
 
----
 
-## 📸 Screenshot Placeholder
-
-```md
-![Multi-PDF Chat UI](../assets/multi-pdf-chat-ui.png)
-```
 
 ---
 
