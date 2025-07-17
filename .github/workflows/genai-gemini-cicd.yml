@@ -1,0 +1,47 @@
+# .github/workflows/genai-gemini-cicd.yml
+name: 🛠️ CI/CD - GenAI Gemini Repo
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-lint-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v3
+
+    - name: 🐍 Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: 📦 Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: 🧹 Run Linting (flake8)
+      run: |
+        pip install flake8
+        flake8 . --exclude=.venv,__pycache__,.git,__init__.py
+
+    # Optional: Add test runner here if tests exist
+
+    - name: 🚀 Deploy to EC2 (or your server)
+      if: github.ref == 'refs/heads/main'
+      run: |
+        echo "Deploying the app..."
+        # Replace below with actual SSH + deployment script
+        # Example:
+        # ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
+        #   cd /home/ubuntu/Gen-AI_Google-Gemini
+        #   git pull origin main
+        #   pip install -r requirements.txt
+        #   pkill -f streamlit || true
+        #   nohup streamlit run app.py &
+        # EOF
