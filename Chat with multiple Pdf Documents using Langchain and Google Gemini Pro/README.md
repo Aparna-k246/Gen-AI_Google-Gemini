@@ -1,57 +1,89 @@
 # 📄📚 Multi-PDF Chatbot using LangChain + Google Gemini Pro
 
-An interactive chatbot that allows users to **upload and query multiple PDFs** simultaneously using **LangChain** for chunking/retrieval and **Google Gemini Pro** for answer generation. Perfect for extracting insights from large document sets.
+An interactive chatbot that allows users to **upload and query multiple PDFs** using **LangChain** for chunking/retrieval and **Google Gemini Pro** for intelligent answer generation. Designed with a **modular, production-ready architecture** under `src/`.
 
 ---
 
 ## 📂 Project Structure
 
 ```
-Chat with multiple Pdf Documents using Langchain and Google Gemini Pro/
-├── app.py               # Streamlit UI: PDF uploader, query box, and result area
-└── requirements.txt     # Dependencies
+multi-pdf-gemini-chat/
+├── app.py                   # Streamlit app UI
+├── src/
+│   ├── chains.py            # Loads prompt + QA chain
+│   ├── pdf_utils.py         # Extracts raw text from uploaded PDFs
+│   ├── chunk_utils.py       # Splits text into chunks using LangChain
+│   ├── vector_utils.py      # Creates & loads FAISS vector store
+│   └── env_loader.py        # Loads environment variables from .env
+├── faiss_index/             # Saved vector DB
+├── .env                     # Contains your API key (excluded from repo)
+└── requirements.txt         # Python dependencies
 ```
 
 ---
 
-## 🚀 Features
+## 🚀 Key Features
 
-- 📑 Upload multiple PDFs and chat with them
-- 🔍 Uses LangChain to chunk and embed document content
-- 💬 Gemini Pro generates accurate, context-aware answers
-- 🧠 Maintains document context across queries
+- 📄 Upload and query **multiple PDFs**
+- 🧠 Uses **LangChain** for context-rich chunking + retrieval
+- 💬 Uses **Google Gemini Pro** for natural, accurate responses
+- 🔗 Modular code under `src/` for easy maintenance & reuse
+- 🔐 API key managed securely with `.env` file
 
 ---
 
-## 🛠️ How to Run
+## 📌 Prompt Template (in `chains.py`)
+
+> _“If the answer is not in the provided context, respond with: 'Answer is not available in the context.'”_
+
+- Custom-crafted to **minimize hallucination**
+- Built using `PromptTemplate` + `load_qa_chain` with Gemini Pro
+
+---
+
+## 💻 How to Run Locally
 
 ```bash
 pip install -r requirements.txt
 streamlit run app.py
 ```
 
-> ⚙️ Add your Gemini API key in `.env` or as an environment variable: `GOOGLE_API_KEY=your_key_here`.
+➡️ Then add your Google API key to a `.env` file:
+
+```env
+GOOGLE_API_KEY=your_api_key_here
+```
 
 ---
 
-## 💡 Use Cases
+## 🧠 Use Cases
 
-- Research literature review from multiple papers
-- Chat with legal contracts, policies, or financial reports
-- Ask questions across mixed domains (PDFs with different subjects)
-
----
-
-## 🔭 Future Enhancements
-
-- Add chat history with memory
-- PDF summarization before full query
-- Use cloud storage for larger PDFs
-
-
+- 🔬 Literature review across research PDFs
+- 📃 Legal contract analysis
+- 💼 Financial report Q&A
+- 🏫 Students querying lecture notes
 
 ---
 
-## 📫 Contact
+## 🎯 For Recruiters / Hiring Managers
+
+- ✅ Showcases **modular GenAI architecture**
+- ✅ Integrates **LangChain + Gemini Pro + FAISS** in a clean RAG pipeline
+- ✅ Demonstrates practical problem-solving via LLM-based retrieval
+- ✅ Portfolio-ready: deployable, readable, and scalable
+
+---
+
+## 🔭 Roadmap
+
+- [x] Modularize all components into `src/` ✅
+- [ ] Add Dockerfile for containerized deployment
+- [ ] Add chat history and session memory
+- [ ] Add HuggingFace or Streamlit Cloud deployment script
+- [ ] Enable multi-user session capability
+
+---
+
+## 📫 Let's Connect
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Aparna-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/aparna-k-628005167/)
